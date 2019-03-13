@@ -11,4 +11,9 @@ return [
         'class' => yii\caching\FileCache::class,
         'cachePath' => '@root/runtime/cache',
     ],
+    'db' => [
+        'class' => yii\db\Connection::class,
+        'dsn' => 'sqlite:@root/runtime/database.sqlite',
+        'charset' => 'utf8',
+    ],
 ];

@@ -8,6 +8,7 @@ Yii Framework Application Template for quickly building API-first applications.
 
     git clone https://github.com/cebe/yii2-app-api my-api
     cd my-api
+    composer install
 
 ## Overview
 

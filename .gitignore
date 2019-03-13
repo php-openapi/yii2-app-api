@@ -1,1 +1,5 @@
 /vendor
+
+/*/*.pid
+/*/*.log
+session_mm_*.sem
