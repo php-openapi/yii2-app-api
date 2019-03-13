@@ -1,0 +1,2 @@
+/components-*.local.php
+!/components-ENV.local.php
