@@ -23,7 +23,10 @@ class FakerController extends Controller
             $this->stdout('Generating fake data for ' . StringHelper::basename($fakerFile, 'Faker.php') . '...');
             for($i = 0; $i < 10; $i++) {
                 $faker = new $className;
-                $faker->generateModel();
+                $model = $faker->generateModel();
+                if (!$model->save()) {
+                    print_r($model->getErrors());
+                }
                 $this->stdout(".");
             }
             $this->stdout("done.\n", Console::BOLD, Console::FG_GREEN);
