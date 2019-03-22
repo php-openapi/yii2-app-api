@@ -1,5 +1,8 @@
 {
     "name": "cebe/yii2-app-api",
+    "description": "Yii Framework Application Template for quickly building API-first applications.",
+    "type": "project",
+    "license": "MIT",
     "require": {
         "php": ">=7.1.0",
         "yiisoft/yii2": "~2.0.16",
