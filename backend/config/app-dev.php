@@ -18,10 +18,8 @@ $config = array_merge(require(__DIR__ . '/app.php'), [
 $config['bootstrap'][] = 'gii';
 $config['modules']['gii'] = [
     'class' => yii\gii\Module::class,
-    'generators' => [
-        // add ApiGenerator to Gii module
-        'api' => \cebe\yii2openapi\generator\ApiGenerator::class,
-    ],
+    // add ApiGenerator to Gii module
+    'generators' => require __DIR__ . '/../../config/gii-generators.php',
 ];
 
 return $config;
