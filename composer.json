@@ -6,8 +6,8 @@
     "require": {
         "php": ">=7.1.0",
         "yiisoft/yii2": "~2.0.16",
-        "cebe/php-openapi": "dev-master",
-        "cebe/yii2-openapi": "dev-master",
+        "cebe/php-openapi": "^0.9.0@beta",
+        "cebe/yii2-openapi": "^0.9.0@beta",
         "yiisoft/yii2-gii": "~2.0.0 | ~2.1.0"
     },
     "autoload": {
