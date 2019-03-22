@@ -5,6 +5,11 @@
  */
 
 return [
+    'user' => [
+        'enableSession' => false,
+        'loginUrl' => null,
+        'identityClass' => \common\models\ApiUser::class,
+    ],
     'request' => [
         'parsers' => [
             'application/json' => yii\web\JsonParser::class,
