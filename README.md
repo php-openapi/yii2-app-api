@@ -60,3 +60,35 @@ Then set up the database by running the following commands on the command line:
     ./yii migrate/up
     ./yii faker
 
+## Try it
+
+    cd api
+    make start
+
+Your API is now available at `http://localhost:8337/`. Try to access an endpoint of your spec via `curl`:
+
+    $ curl http://localhost:8337/pets
+    [
+        {
+            "name": "Eos rerum modi et quaerat voluptatibus.",
+            "tag": "Totam in commodi in est nisi nihil aut et."
+        },
+        {
+            "name": "Voluptas quia eos nisi deleniti itaque aspernatur aspernatur.",
+            "tag": "Temporibus id culpa dolorem sequi aut."
+        },
+        {
+            "name": "Facere aut similique laboriosam omnis perferendis et.",
+            "tag": "Quo harum quo et ea distinctio non quam."
+        },
+        ...
+    ]
+
+
+# Support
+
+Professional support, consulting as well as software development services are available:
+
+https://www.cebe.cc/en/contact
+
+Development of this library is sponsored by [cebe.:cloud: "Your Professional Deployment Platform"](https://cebe.cloud).

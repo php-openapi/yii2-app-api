@@ -19,6 +19,12 @@ return [
     'response' => [
         'class' => yii\web\Response::class,
         'format' =>  yii\web\Response::FORMAT_JSON,
+        'formatters' => [
+            yii\web\Response::FORMAT_JSON => [
+                'class' => \yii\web\JsonResponseFormatter::class,
+                'prettyPrint' => YII_DEBUG,
+            ],
+        ],
     ],
     'urlManager' => [
         'enablePrettyUrl' => true,
