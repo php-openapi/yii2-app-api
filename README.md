@@ -17,7 +17,7 @@ This application template consists of 3 application tiers:
 
 ## Setup
 
-    composer create-project --stability=beta cebe/yii2-app-api my-api
+    composer create-project cebe/yii2-app-api my-api
     cd my-api
     cp env.php.dist env.php
 
