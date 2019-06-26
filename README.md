@@ -4,6 +4,8 @@
 
 Yii Framework Application Template for quickly building API-first applications.
 
+Based on [yii2-openapi](https://github.com/cebe/yii2-openapi) (code generator) and [php-openapi](https://github.com/cebe/php-openapi) (specification reader and validator).
+
 ## Overview
 
 This application template consists of 3 application tiers:
