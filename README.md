@@ -11,6 +11,10 @@ Based on [yii2-openapi](https://github.com/cebe/yii2-openapi) (code generator) a
 [![License](https://poser.pugx.org/cebe/yii2-app-api/license)](https://packagist.org/packages/cebe/yii2-app-api)
 
 
+## Demo
+
+[![asciicast](https://asciinema.org/a/GSnZFeL0beAwLvbhIn50oVI9w.svg)](https://asciinema.org/a/GSnZFeL0beAwLvbhIn50oVI9w)
+
 ## Overview
 
 This application template consists of 3 application tiers:
