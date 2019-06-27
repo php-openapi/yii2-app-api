@@ -97,6 +97,8 @@ Your API is now available at `http://localhost:8337/`. Try to access an endpoint
 
 # Support
 
+**Need help with your API project?**
+
 Professional support, consulting as well as software development services are available:
 
 https://www.cebe.cc/en/contact
