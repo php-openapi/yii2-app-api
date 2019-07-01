@@ -94,6 +94,43 @@ Your API is now available at `http://localhost:8337/`. Try to access an endpoint
         ...
     ]
 
+## Application structure
+
+- `api/` - API application tier
+  - `config/` - configuration for API tier
+    - `url-rules.php` - custom URL rules
+    - `url-rules.rest.php` - URL rules **generated** from OpenAPI Description
+    - `components.php` - application components
+    - `app.php` - Yii application config (+ overrides for different environments `app-*.php`)
+  - `controllers/` - Controller classes **generated** from OpenAPI Description
+  - `web/` - public web directory for API application
+
+- `backend/` - Backend application tier
+  - `config/` - configuration for Backend tier
+    - `components.php` - application components
+    - `app.php` - Yii application config (+ overrides for different environments `app-*.php`)
+  - `controllers/` - Controller classes
+  - `views/` - View files
+  - `web/` - public web directory for Backend application
+
+- `common/` - common code files
+  - `models/` - model classes **generated** from OpenAPI Description
+  - `migrations/` - database migrations **generated** from OpenAPI Description
+
+- `config/` - Common configuration for all application tiers
+  - `components.php` - Yii application components (+ overrides for different environments `components-*.php`)
+  - `env.php` - Environment setup (YII_DEBUG, YII_ENV, path aliases, composer autoloader)
+  - `events.php` - Class wide event listeners
+  - `gii-generators.php` - configuration for the Gii code generator (allows to set default values for the ApiGenerator)
+  - `params.php` - Configuration for `Yii::$app->params`
+
+- `console/` - Console application tier
+  - `config/` - configuration for Console tier
+    - `components.php` - application components
+    - `app.php` - Yii application config (+ overrides for different environments `app-*.php`)
+
+- `logs/` - log files
+- `runtime/` - temporary runtime files
 
 # Support
 
