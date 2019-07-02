@@ -21,8 +21,8 @@ class FakerController extends Controller
         foreach($fakers as $fakerFile) {
             $className = 'common\\models\\' . StringHelper::basename($fakerFile, '.php');
             $this->stdout('Generating fake data for ' . StringHelper::basename($fakerFile, 'Faker.php') . '...');
+            $faker = new $className;
             for($i = 0; $i < 10; $i++) {
-                $faker = new $className;
                 $model = $faker->generateModel();
                 if (!$model->save()) {
                     print_r($model->getErrors());
