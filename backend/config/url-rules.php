@@ -4,4 +4,8 @@
 
 return [
     '' => 'site/index',
+    
+    // default URLs for making existing controllers available
+    '<controller>' => '<controller>/index',
+    '<controller>/<action>' => '<controller>/<action>',
 ];
