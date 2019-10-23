@@ -20,7 +20,7 @@ Based on [yii2-openapi](https://github.com/cebe/yii2-openapi) (code generator) a
 This application template consists of 3 application tiers:
 
 - `api`, contains the Yii application for the REST API.
-- `console`, contains the Yii application for console commands, cronjobs or queues.
+- `console`, contains the Yii application for console commands, cronjobs or queues (`yii` command).
 - `backend`, contains the Yii application for a CRUD backend on the API data.
 
 
