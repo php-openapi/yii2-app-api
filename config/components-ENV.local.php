@@ -12,9 +12,10 @@
 return [
     'db' => [
         'class' => yii\db\Connection::class,
-        'dsn' => 'mysql:host=localhost;dbname=api_db',
-        'username' => 'root',
-        'password' => '',
+        'dsn' => 'mysql:host=db;dbname=api_db', // for docker
+        //'dsn' => 'mysql:host=localhost;dbname=api_db', // use this when mysql runs on your local host
+        'username' => 'api',
+        'password' => 'apisecret',
         'charset' => 'utf8',
     ],
 ];

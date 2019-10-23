@@ -23,3 +23,21 @@ test:
 clean: stop
 
 .PHONY: start stop clean test
+
+docker-up: config/components-dev.local.php config/components-test.local.php env.php stop
+	docker-compose up -d
+	docker-compose exec backend-php sh -c 'cd /app && composer install'
+	@echo ""
+	@echo "API:      http://localhost:8337/"
+	@echo "API docs: http://localhost:8337/docs/index.html"
+	@echo "Backend:  http://localhost:8338/"
+	@echo ""
+
+cli:
+	docker-compose exec backend-php bash
+
+# copy config files if they do not exist
+config/components-%.local.php: config/components-ENV.local.php
+	test -f $@ || cp $< $@
+env.php: env.php.dist
+	test -f $@ || cp $< $@

@@ -1,0 +1,39 @@
+# Development stack overrides
+#
+# Variables are populated with values from `.env`
+#
+version: '2'
+services:
+  api-php:
+    build: api
+    ports:
+      - '8337:80'
+    volumes:
+      # Mount source-code for development
+      - ./:/app
+
+  backend-php:
+    build: backend
+    ports:
+      - '8338:80'
+    volumes:
+      # Re-use local composer cache via host-volume
+      - ~/.composer-docker/cache:/root/.composer/cache:delegated
+      # Mount source-code for development
+      - ./:/app
+
+  db:
+    image: mysql:5.7
+    environment:
+      #- MYSQL_ROOT_PASSWORD=verysecret
+      - MYSQL_DATABASE=api_db
+      - MYSQL_USER=api
+      - MYSQL_PASSWORD=apisecret
+
+  redis:
+    image: redis:3
+
+  mailcatcher:
+    image: nisenabe/mailcatcher
+    ports:
+      - '80'
