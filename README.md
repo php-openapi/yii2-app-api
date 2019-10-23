@@ -33,6 +33,7 @@ If you have an OpenAPI description, you can continue with the next steps:
 1. [Setup](#setup)
 2. [Generate Code](#generate-code)
 
+More Docs and Guides can be found in [/docs](/docs/README.md).
 
 ## Setup <span id="setup"></span>
 
