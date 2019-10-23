@@ -29,7 +29,7 @@ docker-up: config/components-dev.local.php config/components-test.local.php env.
 	docker-compose exec backend-php sh -c 'cd /app && composer install'
 	@echo ""
 	@echo "API:      http://localhost:8337/"
-	@echo "API docs: http://localhost:8337/docs/index.html"
+#	@echo "API docs: http://localhost:8337/docs/index.html" # not yet :)
 	@echo "Backend:  http://localhost:8338/"
 	@echo ""
 
