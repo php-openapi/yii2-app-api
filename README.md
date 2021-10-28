@@ -78,7 +78,7 @@ You can now continue with [generating code](#generate-code).
 
 ### Console
 
-> Tip: If you use Docker, run `make bash` before running any of these commands.
+> Tip: If you use Docker, run `make cli` before running any of these commands.
 
 Run `./yii gii/api` to generate your API code. The `--openApiPath` parameter specifies the path to your OpenAPI
 spec file. The following example will generate API code for the [OpenAPI petstore example](https://github.com/OAI/OpenAPI-Specification/blob/3.0.2/examples/v3.0/petstore-expanded.yaml).
