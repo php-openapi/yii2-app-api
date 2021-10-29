@@ -76,6 +76,8 @@ You can now continue with [generating code](#generate-code).
 
 ## Generate Code <span id="generate-code"></span>
 
+Note: If OpenAPI spec file is present locally on the file system, then for UNIX bases OS, `openApiPath` must start with `/` and should provide aboslute path instead of relative path from the current directory. Example: `/home/user/documents/MyProjectOpenAPISpec.yml`
+
 ### Console
 
 > Tip: If you use Docker, run `make cli` before running any of these commands.
