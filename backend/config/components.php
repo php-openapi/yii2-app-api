@@ -6,7 +6,7 @@
 
 return [
     'request' => [
-        'cookieValidationKey' => 'api1337', // TODO this should be dynamic
+        'cookieValidationKey' => uniqid(uniqid(), true)
     ],
 
     'urlManager' => [
