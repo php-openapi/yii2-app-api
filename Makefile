@@ -1,12 +1,30 @@
+# set user to "root" to run commands as root in docker
+USER=$$(whoami)
+# The docker command to execute commands directly in docker
+DOCKER=docker-compose exec --user=$(USER) backend-php
+# The PHP binary to use, you may add arguments to PHP here
+PHP=php
 
+
+# default target lists general usage information
 default:
 	@echo "The following commands are available:"
 	@echo ""
-	@echo "  make start        start PHP built-in webserver"
-	@echo "  make stop         stop PHP built-in webserver"
+	@echo "  make start          start PHP built-in webserver"
+	@echo "  make stop           stop PHP built-in webserver"
+	@echo "  make start-docker   start docker environment"
+	@echo "  make stop-docker    stop docker environment"
+	@echo "  make cli            run bash in docker environment"
+	@echo "  make bash           alias for 'make cli'"
+
+
+.PHONY: start stop start-docker stop-docker clean test bash cli
+
+
+## PHP runtime ##
 
 # start PHP built-in webserver
-start:
+start: config/components-dev.local.php config/components-test.local.php backend/config/cookie-validation.key env.php
 	@echo "Starting server for api"
 	cd api && $(MAKE) start
 	@echo "Starting server for backend"
@@ -17,27 +35,30 @@ stop:
 	cd api && $(MAKE) stop
 	cd backend && $(MAKE) stop
 
-test:
-	cd api && $(MAKE) test
 
-clean: stop
+## Docker Runtime ##
 
-.PHONY: start stop clean test
+# run bash inside docker container
+bash: cli
+cli:
+	$(DOCKER) bash
 
-docker-up: config/components-dev.local.php config/components-test.local.php env.php stop
+start-docker: config/components-dev.local.php config/components-test.local.php backend/config/cookie-validation.key env.php
 	docker-compose up -d
-	docker-compose exec backend-php sh -c 'cd /app && composer install'
+	$(DOCKER) sh -c 'cd /app && composer install'
 	@echo ""
 	@echo "API:      http://localhost:8337/"
 #	@echo "API docs: http://localhost:8337/docs/index.html" # not yet :)
 	@echo "Backend:  http://localhost:8338/"
 	@echo ""
 
-cli:
-	docker-compose exec backend-php bash
+stop-docker:
+	docker-compose down
 
 # copy config files if they do not exist
 config/components-%.local.php: config/components-ENV.local.php
 	test -f $@ || cp $< $@
 env.php: env.php.dist
 	test -f $@ || cp $< $@
+backend/config/cookie-validation.key:
+	test -s $@ || php -r 'echo bin2hex(random_bytes(20));' > $@

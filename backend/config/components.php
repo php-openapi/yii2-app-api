@@ -6,7 +6,7 @@
 
 return [
     'request' => [
-        'cookieValidationKey' => 'api1337', // TODO this should be dynamic
+        'cookieValidationKey' => file_get_contents(__DIR__ . '/cookie-validation.key'),
     ],
 
     'urlManager' => [

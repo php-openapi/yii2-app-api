@@ -55,6 +55,8 @@ You need to adjust `config/components-dev.local.php` to configure your database 
 
 After that, run `make start` and `make stop` to control the PHP webservers for API and backend.
 
+You may use `XDEBUGW=1` to enable xdebug for the webserver, e.g. `make XDEBUGW=1 start`.
+
 You can now continue with [generating code](#generate-code).
 
 ### Using Docker
@@ -62,7 +64,7 @@ You can now continue with [generating code](#generate-code).
 You need [Docker](https://docs.docker.com/install/) and [Docker Compose](https://docs.docker.com/compose/install/) installed.
 For the easiest way you need GNU make, then run:
 
-    make docker-up
+    make start-docker
     
 This uses `docker-compose` to start docker containers for the API and the backend including a database.
 
@@ -76,8 +78,6 @@ You can now continue with [generating code](#generate-code).
 
 ## Generate Code <span id="generate-code"></span>
 
-Note: If OpenAPI spec file is present locally on the file system, then for UNIX bases OS, `openApiPath` must start with `/` and should provide aboslute path instead of relative path from the current directory. Example: `/home/user/documents/MyProjectOpenAPISpec.yml`
-
 ### Console
 
 > Tip: If you use Docker, run `make cli` before running any of these commands.
@@ -86,6 +86,9 @@ Run `./yii gii/api` to generate your API code. The `--openApiPath` parameter spe
 spec file. The following example will generate API code for the [OpenAPI petstore example](https://github.com/OAI/OpenAPI-Specification/blob/3.0.2/examples/v3.0/petstore-expanded.yaml).
 
     ./yii gii/api --openApiPath=https://raw.githubusercontent.com/OAI/OpenAPI-Specification/3.0.2/examples/v3.0/petstore-expanded.yaml
+
+> Note: If the OpenAPI spec file is present locally on the file system, then `openApiPath` must be specified as an absolute path, relative paths will not work correctly.
+> On UNIX based OS it must start with `/`. Example: `/home/user/documents/MyProjectOpenAPISpec.yml`
 
 Run `./yii gii/api --help` for a list of configuration options. You may also adjust the configuration in `config/gii-generators.php`.
 

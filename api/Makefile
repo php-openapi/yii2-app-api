@@ -8,10 +8,10 @@ XDEBUGW=0
 WEBPORT=8337
 
 ifeq ($(XDEBUG),1)
-  XDEBUGARGS=-dzend_extension=xdebug.so -dxdebug.remote_enable=1
+  XDEBUGARGS=-dzend_extension=xdebug.so -dxdebug.mode=debug,develop -dxdebug.start_with_request=yes -dxdebug.discover_client_host=yes -dxdebug.remote_enable=1 -dxdebug.remote_autostart=1
 endif
 ifeq ($(XDEBUGW),1)
-  XDEBUGARGSW=-dzend_extension=xdebug.so -dxdebug.remote_enable=1
+  XDEBUGARGSW=-dzend_extension=xdebug.so -dxdebug.mode=debug,develop -dxdebug.start_with_request=yes -dxdebug.discover_client_host=yes -dxdebug.remote_enable=1 -dxdebug.remote_autostart=1
 endif
 
 
@@ -20,11 +20,11 @@ current_dir=$(shell pwd)
 default:
 
 start: stop
-	@echo "Starting PHP webserver at http://localhost:$(WEBPORT), see php.log for access log."
+	@echo "Starting PHP webserver at http://localhost:$(WEBPORT), see logs/php-api.log for access log."
 	@echo ""
 	@echo "Run  make stop  to stop it."
 	@echo ""
-	YII_ENV=dev php $(PHPARGS) $(XDEBUGARGSW) -S localhost:$(WEBPORT) -t web $(current_dir)/router.php >php.log 2>&1 & echo "$$!" > php.pid
+	YII_ENV=dev php $(PHPARGS) $(XDEBUGARGSW) -S localhost:$(WEBPORT) -t web $(current_dir)/router.php >../logs/php-api.log 2>&1 & echo "$$!" > php.pid
 
 stop:
 	@echo "Stopping PHP webserver..."
