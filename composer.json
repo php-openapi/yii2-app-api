@@ -7,8 +7,8 @@
         "php": ">=7.1.0",
         "yiisoft/yii2": "~2.0.16",
         "cebe/php-openapi": "^1.1",
-        "cebe/yii2-openapi": "^1.0",
-        "yiisoft/yii2-gii": "~2.1.0"
+        "cebe/yii2-openapi": "^2.0@alpha",
+        "yiisoft/yii2-gii": "^2.1"
     },
     "autoload": {
         "psr-4": {
