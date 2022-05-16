@@ -4,6 +4,8 @@ USER=$$(whoami)
 DOCKER=docker-compose exec --user=$(USER) backend-php
 # The PHP binary to use, you may add arguments to PHP here
 PHP=php
+# directories writeable by webserver
+WRITEABLE_DIRS=/app/runtime /app/logs /app/backend/web/assets
 
 
 # default target lists general usage information
@@ -43,9 +45,12 @@ bash: cli
 cli:
 	$(DOCKER) bash
 
-start-docker: config/components-dev.local.php config/components-test.local.php backend/config/cookie-validation.key env.php
+start-docker: config/components-dev.local.php config/components-test.local.php backend/config/cookie-validation.key env.php stop
 	docker-compose up -d
-	$(DOCKER) sh -c 'cd /app && composer install'
+	docker-compose exec -T backend-php bash -c "grep '^$(shell whoami):' /etc/passwd || useradd -m '$(shell whoami)' --uid=$(shell id -u) -G www-data -s /bin/bash"
+	docker-compose exec -T backend-php bash -c "sed -i 's/#force_color_prompt=yes/force_color_prompt=yes/' /home/$(shell whoami)/.bashrc && sed -i 's~etc/bash_completion~etc/bash_completion.d/yii~' /home/$(shell whoami)/.bashrc"
+	docker-compose exec -T backend-php bash -c "chgrp -R www-data $(WRITEABLE_DIRS) && chmod -R g+w $(WRITEABLE_DIRS)"
+	$(DOCKER) sh -c 'cd /app && composer install --no-progress --no-interaction --ansi'
 	@echo ""
 	@echo "API:      http://localhost:8337/"
 #	@echo "API docs: http://localhost:8337/docs/index.html" # not yet :)
