@@ -1,0 +1,26 @@
+# Development stack overrides
+#
+# Variables are populated with values from `.env`
+#
+version: '2'
+services:
+  api-php:
+    ports:
+      - '8337:80'
+
+  backend-php:
+    ports:
+      - '8338:80'
+    volumes:
+      # Re-use local composer cache via host-volume
+      - ~/.composer-docker/cache:/root/.composer/cache:delegated
+
+  db:
+    volumes:
+      - ./runtime/mariadb-data:/var/lib/mysql
+    ports:
+      - '3386:3306'
+
+  mailcatcher:
+    ports:
+      - '8055:1080'
