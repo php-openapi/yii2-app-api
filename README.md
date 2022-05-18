@@ -62,6 +62,11 @@ You can now continue with [generating code](#generate-code).
 ### Using Docker
 
 You need [Docker](https://docs.docker.com/install/) and [Docker Compose](https://docs.docker.com/compose/install/) installed.
+
+Create the repository:
+
+    composer create-project cebe/yii2-app-api my-api
+
 For the easiest way you need GNU make, then run:
 
     make start-docker

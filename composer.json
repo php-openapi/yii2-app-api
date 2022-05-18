@@ -7,7 +7,7 @@
         "php": ">=7.1.0",
         "yiisoft/yii2": "~2.0.16",
         "cebe/php-openapi": "^1.1",
-        "cebe/yii2-openapi": "^2.0@alpha",
+        "cebe/yii2-openapi": "^2.0@beta",
         "yiisoft/yii2-gii": "^2.1"
     },
     "autoload": {

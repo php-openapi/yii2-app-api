@@ -11,6 +11,10 @@ services:
     volumes:
       # Mount source-code for development
       - ./:/app
+    depends_on:
+      - db
+      - redis
+      - mailcatcher
 
   backend-php:
     build: backend
@@ -21,14 +25,18 @@ services:
       - ~/.composer-docker/cache:/root/.composer/cache:delegated
       # Mount source-code for development
       - ./:/app
+    depends_on:
+      - db
+      - redis
+      - mailcatcher
 
   db:
-    image: mysql:5.7
+    image: mariadb:10.8
     environment:
-      #- MYSQL_ROOT_PASSWORD=verysecret
-      - MYSQL_DATABASE=api_db
-      - MYSQL_USER=api
-      - MYSQL_PASSWORD=apisecret
+      - MARIADB_ROOT_PASSWORD=verysecret
+      - MARIADB_DATABASE=api_db
+      - MARIADB_USER=api
+      - MARIADB_PASSWORD=apisecret
 
   redis:
     image: redis:3
@@ -36,4 +44,4 @@ services:
   mailcatcher:
     image: nisenabe/mailcatcher
     ports:
-      - '80'
+      - '8055:1080'

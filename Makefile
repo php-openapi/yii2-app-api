@@ -45,7 +45,7 @@ bash: cli
 cli:
 	$(DOCKER) bash
 
-start-docker: config/components-dev.local.php config/components-test.local.php backend/config/cookie-validation.key env.php stop
+start-docker: runtime/build-docker config/components-dev.local.php config/components-test.local.php backend/config/cookie-validation.key env.php stop
 	docker-compose up -d
 	docker-compose exec -T backend-php bash -c "grep '^$(shell whoami):' /etc/passwd || useradd -m '$(shell whoami)' --uid=$(shell id -u) -G www-data -s /bin/bash"
 	docker-compose exec -T backend-php bash -c "sed -i 's/#force_color_prompt=yes/force_color_prompt=yes/' /home/$(shell whoami)/.bashrc && sed -i 's~etc/bash_completion~etc/bash_completion.d/yii~' /home/$(shell whoami)/.bashrc"
@@ -59,6 +59,10 @@ start-docker: config/components-dev.local.php config/components-test.local.php b
 
 stop-docker:
 	docker-compose down
+
+runtime/build-docker: */Dockerfile
+	docker-compose build
+	touch $@
 
 # copy config files if they do not exist
 config/components-%.local.php: config/components-ENV.local.php
