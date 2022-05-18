@@ -52,9 +52,10 @@ start-docker: runtime/build-docker config/components-dev.local.php config/compon
 	docker-compose exec -T backend-php bash -c "chgrp -R www-data $(WRITEABLE_DIRS) && chmod -R g+w $(WRITEABLE_DIRS)"
 	$(DOCKER) sh -c 'cd /app && composer install --no-progress --no-interaction --ansi'
 	@echo ""
-	@echo "API:      http://localhost:8337/"
-#	@echo "API docs: http://localhost:8337/docs/index.html" # not yet :)
-	@echo "Backend:  http://localhost:8338/"
+	@echo "API:         http://localhost:8337/"
+#	@echo "API docs:    http://localhost:8337/docs/index.html" # not yet :)
+	@echo "Backend:     http://localhost:8338/"
+	@echo "Mailcatcher: http://localhost:8055/"
 	@echo ""
 
 stop-docker:
