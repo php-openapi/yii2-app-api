@@ -1,5 +1,7 @@
 /vendor
 
+/docker-compose.override.yml
+
 /*/*.pid
 /*/*.log
 session_mm_*.sem
