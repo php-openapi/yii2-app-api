@@ -26,7 +26,7 @@ default:
 ## PHP runtime ##
 
 # start PHP built-in webserver
-start: config/components-dev.local.php config/components-test.local.php backend/config/cookie-validation.key env.php
+start: config/components-dev.local.php backend/config/cookie-validation.key env.php
 	@echo "Starting server for api"
 	cd api && $(MAKE) start
 	@echo "Starting server for backend"
@@ -45,7 +45,7 @@ bash: cli
 cli:
 	$(DOCKER) bash
 
-start-docker: docker-compose.override.yml runtime/build-docker config/components-dev.local.php config/components-test.local.php backend/config/cookie-validation.key env.php stop
+start-docker: docker-compose.override.yml runtime/build-docker config/components-dev.local.php backend/config/cookie-validation.key env.php stop
 	docker-compose up -d
 	docker-compose exec -T backend-php bash -c "grep '^$(shell whoami):' /etc/passwd || useradd -m '$(shell whoami)' --uid=$(shell id -u) -G www-data -s /bin/bash -d /app/runtime/home"
 	docker-compose exec -T backend-php bash -c "sed -i 's/#force_color_prompt=yes/force_color_prompt=yes/' /app/runtime/home/.bashrc && sed -i 's~etc/bash_completion~etc/bash_completion.d/yii~' /app/runtime/home/.bashrc"
@@ -74,3 +74,19 @@ docker-compose.override.yml: docker-compose.override.dist.yml
 	test -f $@ || cp $< $@
 backend/config/cookie-validation.key:
 	test -s $@ || php -r 'echo bin2hex(random_bytes(20));' > $@
+
+
+## Docker Runtime Tests ##
+
+test: tests/_data/dump.sql
+	$(DOCKER) vendor/bin/codecept run
+
+clean:
+	rm -rf tests/_data/dump.sql
+
+# generate database dump for test env
+tests/_data/dump.sql: $(shell find common/migrations -type f)
+	$(DOCKER) sh -c 'YII_ENV=test ./yii migrate/fresh --interactive=0'
+	$(DOCKER) sh -c 'mysqldump -h db-test -uapi_test -papisecret api_db_test > tests/_data/dump.sql'
+	# for postgres you may use this command instead:
+	#$(DOCKER) sh -c 'PGPASSWORD=apisecret pg_dump --schema-only --clean --if-exists -w -h db-test -U api_test -d api_db_test -f tests/_data/dump.sql'

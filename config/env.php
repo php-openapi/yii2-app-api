@@ -1,7 +1,11 @@
 <?php
 
 if (!defined('YII_ENV')) {
-    if (is_file($env = __DIR__ . '/../env.php')) {
+    // allow setting YII ENV via environment, load it from local config if no env is set
+    if (getenv('YII_ENV')) {
+        define('YII_ENV', strtolower(getenv('YII_ENV')));
+        define('YII_DEBUG', YII_ENV === 'dev' || YII_ENV === 'test');
+    } elseif (is_file($env = __DIR__ . '/../env.php')) {
         include($env);
     } else {
         define('YII_DEBUG', false);
