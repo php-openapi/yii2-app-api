@@ -6,8 +6,6 @@ version: '2'
 services:
   api-php:
     build: api
-    ports:
-      - '8337:80'
     volumes:
       # Mount source-code for development
       - ./:/app
@@ -18,8 +16,6 @@ services:
 
   backend-php:
     build: backend
-    ports:
-      - '8338:80'
     volumes:
       # Re-use local composer cache via host-volume
       - ~/.composer-docker/cache:/root/.composer/cache:delegated
@@ -51,5 +47,4 @@ services:
 
   mailcatcher:
     image: nisenabe/mailcatcher
-    ports:
-      - '8055:1080'
+
