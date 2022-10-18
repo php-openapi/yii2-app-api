@@ -77,6 +77,7 @@ You can now continue with [generating code](#generate-code).
 
 > Note: If you don't have GNU make, you need to copy the configuration files as in the PHP directly section, then run:
 > 
+>     cp docker-compose.override.dist.yml docker-compose.override.yml
 >     docker-compose up -d
 >     docker-compose exec backend-php sh -c 'cd /app && composer install'
 

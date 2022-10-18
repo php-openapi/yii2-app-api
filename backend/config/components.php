@@ -8,7 +8,9 @@ return [
     'request' => [
         'cookieValidationKey' => file_get_contents(__DIR__ . '/cookie-validation.key'),
     ],
-
+    'errorHandler' => [
+        'errorAction' => 'site/error',
+    ],
     'urlManager' => [
         'enablePrettyUrl' => true,
         'enableStrictParsing' => true,
