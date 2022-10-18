@@ -86,7 +86,7 @@ You can now continue with [generating code](#generate-code).
 
 At this point you can start generating your API code to play with it by following the instructions below.
 If you'd like to start a real project instead of just playing around you can find more detailed
-documentation in [docs/README.md](docs/README.md) specifically the ["Getting Started"-Section](docs/gettings-started.md).
+documentation in [docs/README.md](docs/README.md) specifically the ["Getting Started"-Section](docs/getting-started.md).
 
 ### Console
 
