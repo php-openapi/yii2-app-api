@@ -16,10 +16,11 @@ class FakerController extends Controller
     {
         $fakers = FileHelper::findFiles(\Yii::getAlias('@common/models'), [
             'only' => ['*Faker.php'],
+            'except' => ['BaseModelFaker.php'],
         ]);
 
         foreach($fakers as $fakerFile) {
-            $className = 'common\\models\\' . StringHelper::basename($fakerFile, '.php');
+            $className = 'common\\models\\faker\\' . StringHelper::basename($fakerFile, '.php');
             $this->stdout('Generating fake data for ' . StringHelper::basename($fakerFile, 'Faker.php') . '...');
             $faker = new $className;
             for($i = 0; $i < 10; $i++) {
