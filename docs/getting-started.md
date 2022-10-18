@@ -20,6 +20,7 @@ in the next step.
 If you don't know how to create OpenAPI descriptions you can check out the following resources:
 
   - <https://oai.github.io/Documentation/start-here.html>
+  - <https://idratherbewriting.com/learnapidoc/pubapis_openapi_tutorial_overview.html>
   - ... (if you happen to know better resources to look at, please [let us know](https://github.com/cebe/yii2-app-api/issues/new)
 
 Also check out the [OpenAPI Specification](https://spec.openapis.org/oas/v3.1.0) itself.
