@@ -47,7 +47,7 @@ Steps:
    <!DOCTYPE html>
   ```
   
-- Add a navigation to the mail layout:
+- Add a navigation to the main layout:
 
   ```php
     <?php \yii\bootstrap4\NavBar::begin() ?>
