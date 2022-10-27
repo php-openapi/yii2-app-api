@@ -1,12 +1,14 @@
 # set user to "root" to run commands as root in docker
 USER=$$(whoami)
 # The docker command to execute commands directly in docker
-DOCKER=docker-compose exec --user=$(USER) backend-php
+DOCKER=docker-compose exec -T --user="$(USER)" backend-php
 # The PHP binary to use, you may add arguments to PHP here
 PHP=php
 # directories writeable by webserver
 WRITEABLE_DIRS=/app/runtime /app/logs /app/backend/web/assets
 
+TESTCASE=
+COMMAND=
 
 # default target lists general usage information
 default:
@@ -43,7 +45,10 @@ stop:
 # run bash inside docker container
 bash: cli
 cli:
-	$(DOCKER) bash
+	docker-compose exec --user="$(USER)" backend-php bash
+
+run:
+	$(DOCKER) sh -c '$(COMMAND)'
 
 start-docker: docker-compose.override.yml runtime/build-docker config/components-dev.local.php backend/config/cookie-validation.key env.php stop
 	docker-compose up -d
@@ -79,7 +84,7 @@ backend/config/cookie-validation.key:
 ## Docker Runtime Tests ##
 
 test: tests/_data/dump.sql
-	$(DOCKER) vendor/bin/codecept run
+	$(DOCKER) vendor/bin/codecept run $(TESTCASE)
 
 clean:
 	rm -rf tests/_data/dump.sql
