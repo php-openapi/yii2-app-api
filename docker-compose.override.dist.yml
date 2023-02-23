@@ -10,7 +10,7 @@ services:
     ports:
       - '8337:80'
     volumes:
-      - api/config/xdebug.ini:/usr/local/etc/php/conf.d/xdebug.ini
+      - ./api/config/xdebug.ini:/usr/local/etc/php/conf.d/xdebug.ini
 
   backend-php:
     environment:
@@ -20,7 +20,7 @@ services:
     volumes:
       # Re-use local composer cache via host-volume
       - ~/.composer-docker/cache:/root/.composer/cache:delegated
-      - backend/config/xdebug.ini:/usr/local/etc/php/conf.d/xdebug.ini
+      - ./backend/config/xdebug.ini:/usr/local/etc/php/conf.d/xdebug.ini
 
   db:
     volumes:
