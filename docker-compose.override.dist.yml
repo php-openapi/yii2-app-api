@@ -5,10 +5,14 @@
 version: '2'
 services:
   api-php:
+    environment:
+      PHP_ENABLE_XDEBUG: true
     ports:
       - '8337:80'
 
   backend-php:
+    environment:
+      PHP_ENABLE_XDEBUG: true
     ports:
       - '8338:80'
     volumes:
