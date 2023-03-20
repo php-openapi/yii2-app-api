@@ -11,6 +11,5 @@ return [
         'modelNamespace' => 'common\\models',
         'fakerNamespace' => 'common\\models\\faker',
         'migrationPath' => '@common/migrations',
-
     ],
 ];
