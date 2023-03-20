@@ -210,4 +210,7 @@ TODO
 
 ```bash
 ./yii gii/api --openApiPath=/app/openapi/schema.yaml --generateMigrations=0  --generateControllers=0 --generateUrls=0
+
+./yii gii/api --openApiPath=/app/openapi/schema.yaml --generateMigrations=1  --generateControllers=0 --generateUrls=0 --generateModels=0 --generateModelFaker=0
+
 ```
