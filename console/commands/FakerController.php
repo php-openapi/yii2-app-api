@@ -19,17 +19,11 @@ class FakerController extends Controller
             'except' => ['BaseModelFaker.php'],
         ]);
 
-        echo PHP_EOL;
-        VarDumper::dump(dirname($fakers[0]));
-        VarDumper::dump($fakers);
+        $sortedFakersModels = static::sortModels($fakers, '\\common\\models\\faker\\');
 
-        $sortedFakers = static::sortModels($fakers, '\\common\\models\\faker\\');
-        VarDumper::dump($sortedFakers);
-        // return;
-
-        foreach($sortedFakers as $fakerFile) {
-            $className = 'common\\models\\faker\\' . StringHelper::basename($fakerFile, '.php').'Faker';
-            $this->stdout('Generating fake data for ' . StringHelper::basename($fakerFile, 'Faker.php') . '...');
+        foreach($sortedFakersModels as $justModelClassName) {
+            $className = 'common\\models\\faker\\' . StringHelper::basename($justModelClassName, '.php').'Faker';
+            $this->stdout('Generating fake data for ' . StringHelper::basename($justModelClassName, 'Faker.php') . '...');
             $faker = new $className;
             for($i = 0; $i < 10; $i++) {
                 $model = $faker->generateModel();
