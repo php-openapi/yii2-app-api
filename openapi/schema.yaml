@@ -1,4 +1,8 @@
 openapi: 3.0.3
+# Edit this schema and start your project
+# This is sample schema
+# To generate code which is based on this schema
+# run commands mentioned Development section in README.md file
 info:
   title: 'Proxy-Service'
   description: ""

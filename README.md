@@ -196,6 +196,18 @@ The following list explains the directory structure in more detail:
 - `logs/` - log files
 - `runtime/` - temporary runtime files
 
+
+# Development
+
+Below commands are helpful while developing this project:
+
+```bash
+./yii gii/api --openApiPath=/app/openapi/schema.yaml --generateMigrations=0  --generateControllers=0 --generateUrls=0
+
+./yii gii/api --openApiPath=/app/openapi/schema.yaml --generateMigrations=1  --generateControllers=0 --generateUrls=0 --generateModels=0 --generateModelFaker=0
+```
+
+
 # Support
 
 **Need help with your API project?**
@@ -205,12 +217,3 @@ Professional support, consulting as well as software development services are av
 https://www.cebe.cc/en/contact
 
 Development of this library is sponsored by [cebe.:cloud: "Your Professional Deployment Platform"](https://cebe.cloud).
-
-TODO
-
-```bash
-./yii gii/api --openApiPath=/app/openapi/schema.yaml --generateMigrations=0  --generateControllers=0 --generateUrls=0
-
-./yii gii/api --openApiPath=/app/openapi/schema.yaml --generateMigrations=1  --generateControllers=0 --generateUrls=0 --generateModels=0 --generateModelFaker=0
-
-```
