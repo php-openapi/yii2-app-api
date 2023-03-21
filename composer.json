@@ -7,7 +7,7 @@
         "php": ">=7.1.0",
         "yiisoft/yii2": "~2.0.16",
         "cebe/php-openapi": "^1.1",
-        "cebe/yii2-openapi": "dev-enhance-faker-to-consider-relations",
+        "cebe/yii2-openapi": "^2.0@beta",
         "yiisoft/yii2-gii": "^2.1"
     },
     "require-dev": {
@@ -41,10 +41,6 @@
         {
             "type": "composer",
             "url": "https://asset-packagist.org"
-        },
-        {
-            "type": "git",
-            "url": "https://github.com/sohelahmed7/yii2-openapi.git"
         }
     ]
 }
