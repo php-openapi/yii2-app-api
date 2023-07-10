@@ -8,8 +8,8 @@ info:
   description: ""
   version: 1.0.0
   contact:
-    name: 'Carsten Brandt'
-    email: cb@cebe.cloud
+    name: '...'
+    email: you@example.com
 servers:
   - url: 'http://localhost:8937'
     description: 'Local Dev API'
