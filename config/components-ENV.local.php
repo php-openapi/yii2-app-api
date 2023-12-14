@@ -17,5 +17,9 @@ return [
         'username' => 'api',
         'password' => 'apisecret',
         'charset' => 'utf8',
+        'schemaMap' => [
+            // add support for MariaDB JSON columns
+            'mysql' => SamIT\Yii2\MariaDb\Schema::class
+        ],
     ],
 ];
