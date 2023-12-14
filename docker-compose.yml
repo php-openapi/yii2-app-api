@@ -9,6 +9,8 @@ services:
     volumes:
       # Mount source-code for development
       - ./:/app
+    extra_hosts:
+      - host.docker.internal:host-gateway
     depends_on:
       - db
       - redis
@@ -21,6 +23,8 @@ services:
       - ~/.composer-docker/cache:/root/.composer/cache:delegated
       # Mount source-code for development
       - ./:/app
+    extra_hosts:
+      - host.docker.internal:host-gateway
     depends_on:
       - db
       - redis
