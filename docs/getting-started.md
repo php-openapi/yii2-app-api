@@ -82,15 +82,3 @@ This will update the existing Models and Controllers and also create migrations 
 It is important to check the migrations manually, for example if you rename columns it will create drop column and create column instaead of rename which may result in data loss.
 
 For each Model and Controller you have a base class that is controlled by the Generator, changes to the base file will be overwritten every time you run the generator. If you want to make changes to the class you can do that in the subclasses, which are only created on the first run and will not be touched on subsequent generator runs.
-
-> Note: There are currently some bugs in the Database part of the generator which results 
-> in wrong migrations being creatated. This mainly affects MySQL and MariaDB, 
-> PostgreSQL should be working fine.
-> 
-> If you run into these you need to adjust the generated migrations manually. Some migrations should be deleted if they contain only wrong changes.
-> See <https://github.com/cebe/yii2-openapi/issues>, specifically <https://github.com/cebe/yii2-openapi/issues/100> and <https://github.com/cebe/yii2-openapi/issues/111>
-
-
-
-
-
