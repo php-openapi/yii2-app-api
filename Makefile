@@ -1,7 +1,7 @@
 # set user to "root" to run commands as root in docker
 USER=$$(whoami)
 # The docker command to execute commands directly in docker
-DOCKER=docker-compose exec -T --user="$(USER)" backend-php
+DOCKER=docker-compose exec -T -w /app --user="$(USER)" backend-php
 # The PHP binary to use, you may add arguments to PHP here
 PHP=php
 # directories writeable by webserver
@@ -20,9 +20,10 @@ default:
 	@echo "  make stop-docker    stop docker environment"
 	@echo "  make cli            run bash in docker environment"
 	@echo "  make bash           alias for 'make cli'"
+	@echo "  make lint           Run OpenAPI linter"
 
 
-.PHONY: start stop start-docker stop-docker clean test bash cli
+.PHONY: start stop start-docker stop-docker clean test bash cli lint lint-php lint-js
 
 
 ## PHP runtime ##
@@ -80,6 +81,19 @@ docker-compose.override.yml: docker-compose.override.dist.yml
 backend/config/cookie-validation.key:
 	test -s $@ || php -r 'echo bin2hex(random_bytes(20));' > $@
 
+
+# Lint API spec
+
+lint: lint-php lint-js
+
+lint-php:
+	$(DOCKER) ./vendor/bin/php-openapi validate openapi/schema.yaml
+
+lint-js: node_modules/.bin/spectral
+	docker-compose run -T --no-deps --rm --user="$$(id -u)" -e FORCE_COLOR=1 -w /app nodejs ./node_modules/.bin/spectral lint openapi/schema.yaml -f stylish --ruleset .spectral.yml
+
+node_modules/.bin/spectral: package.json
+	docker-compose run -T --no-deps --rm --user="$$(id -u)" -e FORCE_COLOR=1 -w /app nodejs npm install
 
 ## Docker Runtime Tests ##
 
