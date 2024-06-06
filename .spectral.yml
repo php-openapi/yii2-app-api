@@ -1,0 +1,8 @@
+# This file configures the spectral OpenAPI linter
+#
+# The default config extends the pre-defined ruleset for OpenAPI 3.
+# Adjust this file to define your own custom rules.
+#
+# See https://meta.stoplight.io/docs/spectral/01baf06bdd05a-create-a-ruleset
+
+extends: ["spectral:oas"]

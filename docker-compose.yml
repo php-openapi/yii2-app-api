@@ -52,3 +52,9 @@ services:
   mailcatcher:
     image: nisenabe/mailcatcher
 
+  # javascript container for running JS OpenAPI linter
+  nodejs:
+    image: node
+    command: 'tail -f /dev/null'
+    volumes:
+      - ./:/app

@@ -150,6 +150,18 @@ Your API is now available at `http://localhost:8337/`. Try to access an endpoint
         ...
     ]
 
+
+## Linting the OpenAPI specification
+
+You can run a linter to check the validity of your OpenAPI specification file:
+
+    make lint-js  # run spectral lint
+    make lint-php # run php-openapi validate
+    make lint     # run both of the above commands
+
+You can find more information on spectral at <https://www.npmjs.com/package/@stoplight/spectral-cli#-documentation-and-community>.
+
+
 ## Application structure <span id="structure"></span>
 
 This application template consists of 3 application tiers:
