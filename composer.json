@@ -1,16 +1,16 @@
 {
-    "name": "cebe/yii2-app-api",
+    "name": "php-openapi/yii2-app-api",
     "description": "Yii Framework Application Template for quickly building API-first applications.",
     "type": "project",
     "license": "MIT",
     "require": {
         "php": ">=7.1.0",
         "yiisoft/yii2": "~2.0.16",
-        "cebe/php-openapi": "^1.1",
-        "cebe/yii2-openapi": "^2.0@beta",
+        "php-openapi/yii2-openapi": "^2.0@beta",
         "yiisoft/yii2-gii": "^2.1"
     },
     "require-dev": {
+        "roave/security-advisories": "dev-latest",
         "codeception/codeception": "^4.2",
         "codeception/module-phpbrowser": "^1.0.0",
         "codeception/module-asserts": "^1.0.0",

@@ -4,11 +4,11 @@
 
 Yii Framework Application Template for quickly building API-first applications.
 
-Based on [yii2-openapi](https://github.com/cebe/yii2-openapi) (code generator) and [php-openapi](https://github.com/cebe/php-openapi) (specification reader and validator).
+Based on [yii2-openapi](https://github.com/php-openapi/yii2-openapi) (code generator) and [php-openapi](https://github.com/php-openapi/php-openapi) (specification reader and validator).
 
-[![Latest Stable Version](https://poser.pugx.org/cebe/yii2-app-api/v/stable)](https://packagist.org/packages/cebe/yii2-app-api)
-[![Total Downloads](https://poser.pugx.org/cebe/yii2-app-api/downloads)](https://packagist.org/packages/cebe/yii2-app-api)
-[![License](https://poser.pugx.org/cebe/yii2-app-api/license)](https://packagist.org/packages/cebe/yii2-app-api)
+[![Latest Stable Version](https://poser.pugx.org/php-openapi/yii2-app-api/v/stable)](https://packagist.org/packages/php-openapi/yii2-app-api)
+[![Total Downloads](https://poser.pugx.org/php-openapi/yii2-app-api/downloads)](https://packagist.org/packages/php-openapi/yii2-app-api)
+[![License](https://poser.pugx.org/php-openapi/yii2-app-api/license)](https://packagist.org/packages/php-openapi/yii2-app-api)
 
 
 ## Demo
@@ -46,7 +46,7 @@ There are two different ways:
 
 Having PHP and a database server installed on your machine, you can run the following commands:
 
-    composer create-project cebe/yii2-app-api my-api
+    composer create-project php-openapi/yii2-app-api my-api
     cd my-api
     cp env.php.dist env.php
     cp config/components-ENV.local.php config/components-dev.local.php
@@ -65,7 +65,7 @@ You need [Docker](https://docs.docker.com/install/) and [Docker Compose](https:/
 
 Create the repository:
 
-    composer create-project cebe/yii2-app-api my-api
+    composer create-project php-openapi/yii2-app-api my-api
 
 For the easiest way you need GNU make, then run:
 
