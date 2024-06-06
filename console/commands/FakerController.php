@@ -2,7 +2,10 @@
 
 namespace console\commands;
 
+use Yii;
+use yii\base\Model;
 use yii\console\Controller;
+use yii\console\ExitCode;
 use yii\helpers\Console;
 use yii\helpers\{FileHelper, VarDumper};
 use yii\helpers\StringHelper;
@@ -12,6 +15,9 @@ use yii\helpers\StringHelper;
  */
 class FakerController extends Controller
 {
+    /**
+     * Fill tables with fake data
+     */
     public function actionIndex()
     {
         $fakers = FileHelper::findFiles(\Yii::getAlias('@common/models'), [
@@ -34,6 +40,45 @@ class FakerController extends Controller
             }
             $this->stdout("done.\n", Console::BOLD, Console::FG_GREEN);
         }
+    }
+
+    /**
+     * Delete all table contents
+     */
+    public function actionClear($requireConfirm = true): int
+    {
+        if ($requireConfirm && !$this->confirm('Do you really want to delete all data?')) {
+            return ExitCode::OK;
+        }
+
+        $fakers = FileHelper::findFiles(\Yii::getAlias('@common/models'), [
+            'only' => ['*Faker.php'],
+            'except' => ['BaseModelFaker.php'],
+        ]);
+
+        $sortedFakersModels = static::sortModels($fakers, '\\common\\models\\faker\\');
+        $sortedFakersModels_DESC = array_reverse($sortedFakersModels);
+        foreach ($sortedFakersModels_DESC as $modelName) {
+            /** @var Model $modelClass */
+            $modelClass = 'common\\models\\base\\'.$modelName;
+            Yii::$app->db->createCommand()->delete($modelClass::tableName())->execute();
+            $this->stdout("Data from $modelName was deleted\n");
+        }
+        return ExitCode::OK;
+    }
+
+    /**
+     * Delete all table contents and refill with fake data
+     */
+    public function actionRefresh(): int
+    {
+        if (!$this->confirm('Do you really want to delete all data and generate new fake data?')) {
+            return ExitCode::OK;
+        }
+
+        $this->actionClear(false);
+        $this->actionIndex();
+        return ExitCode::OK;
     }
 
     public static function sortModels(array $fakers, string $fakerNamespace = 'app\\models\\')
