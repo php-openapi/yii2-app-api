@@ -3,6 +3,7 @@
 namespace console\commands;
 
 use Yii;
+use yii\base\ExitException;
 use yii\base\Model;
 use yii\console\Controller;
 use yii\console\ExitCode;
@@ -16,20 +17,26 @@ use yii\helpers\StringHelper;
 class FakerController extends Controller
 {
     /**
+     * @throws ExitException when not in debug mode.
+     */
+    public function beforeAction($action)
+    {
+        if (!YII_DEBUG) {
+            $this->stdout('Faker command can only be used in development environment!' . PHP_EOL, Console::BOLD, Console::FG_RED);
+            throw new ExitException(ExitCode::UNSPECIFIED_ERROR);
+        }
+        return parent::beforeAction($action);
+    }
+
+    /**
      * Fill tables with fake data
      */
     public function actionIndex()
     {
-        $fakers = FileHelper::findFiles(\Yii::getAlias('@common/models'), [
-            'only' => ['*Faker.php'],
-            'except' => ['BaseModelFaker.php'],
-        ]);
-
-        $sortedFakersModels = static::sortModels($fakers, '\\common\\models\\faker\\');
-
-        foreach($sortedFakersModels as $justModelClassName) {
-            $className = 'common\\models\\faker\\' . StringHelper::basename($justModelClassName, '.php').'Faker';
-            $this->stdout('Generating fake data for ' . StringHelper::basename($justModelClassName, 'Faker.php') . '...');
+        $fakerModels = $this->getFakersModels();
+        foreach($fakerModels as $modelClassName) {
+            $className = 'common\\models\\faker\\' . StringHelper::basename($modelClassName, '.php').'Faker';
+            $this->stdout('Generating fake data for ' . StringHelper::basename($modelClassName, 'Faker.php') . '...');
             $faker = new $className;
             for($i = 0; $i < 10; $i++) {
                 $model = $faker->generateModel();
@@ -51,18 +58,13 @@ class FakerController extends Controller
             return ExitCode::OK;
         }
 
-        $fakers = FileHelper::findFiles(\Yii::getAlias('@common/models'), [
-            'only' => ['*Faker.php'],
-            'except' => ['BaseModelFaker.php'],
-        ]);
-
-        $sortedFakersModels = static::sortModels($fakers, '\\common\\models\\faker\\');
+        $sortedFakersModels = $this->getFakersModels();
         $sortedFakersModels_DESC = array_reverse($sortedFakersModels);
-        foreach ($sortedFakersModels_DESC as $modelName) {
+        foreach ($sortedFakersModels_DESC as $modelClassName) {
             /** @var Model $modelClass */
-            $modelClass = 'common\\models\\base\\'.$modelName;
+            $modelClass = 'common\\models\\base\\'.$modelClassName;
             Yii::$app->db->createCommand()->delete($modelClass::tableName())->execute();
-            $this->stdout("Data from $modelName was deleted\n");
+            $this->stdout("Data from $modelClassName was deleted\n");
         }
         return ExitCode::OK;
     }
@@ -145,5 +147,19 @@ class FakerController extends Controller
         $restLeft = array_slice($sortedDependentModels, 0, $theKey);
 
         $sortedDependentModels = array_merge($restLeft, [$dependentOn], $restRight);
+    }
+
+    /**
+     * @return int[]|string[]
+     */
+    private function getFakersModels(): array
+    {
+        $fakers = FileHelper::findFiles(\Yii::getAlias('@common/models'), [
+            'only' => ['*Faker.php'],
+            'except' => ['BaseModelFaker.php'],
+        ]);
+
+        $sortedFakersModels = static::sortModels($fakers, '\\common\\models\\faker\\');
+        return $sortedFakersModels;
     }
 }
